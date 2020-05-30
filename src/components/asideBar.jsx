@@ -1,12 +1,10 @@
 import React from 'react';
-// Styled Component
-import { Title } from './styled component/styled';
 
 export default function AsideBar(){
   return (
-    <aside className="bg-indigo-10 txt-w p-2">
+    <aside>
 
-      <Title>CRM Clients</Title>
+      <h1>CRM Clients</h1>
 
     </aside>
   );

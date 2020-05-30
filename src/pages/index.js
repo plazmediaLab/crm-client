@@ -1,11 +1,12 @@
 import React from "react"
 
 import Layout from "../components/layout"
+import AsideBar from "../components/asideBar"
 
 const IndexPage = () => (
   <Layout>
     
-    <h3 className="">Index</h3>
+    <AsideBar />
     
   </Layout>
 )

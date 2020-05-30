@@ -6,5 +6,4 @@
 
 // You can delete this file if you're not using it
 // Modular-CSS main style sheets
-import 'modular-css/css/modular.css';
-import 'modular-css/css/modular-css.font.css';
+import './src/utils/globals.css'

@@ -5,6 +5,18 @@ module.exports = {
     author: `@gatsbyjs`,
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-emotion`,
+      options: {
+        // Acepta todas las opciones definidas por el complemento `babel-plugin-emotion`.
+      }
+    },
+    {
+      resolve: `gatsby-plugin-postcss`,
+      options: {
+        // Acepta todas las opciones definidas por el complemento `gatsby-plugin-postcss`.
+      },
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
