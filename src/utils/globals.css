@@ -1,3 +1,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body{
+    font-family: 'Roboto', sans-serif;
+}
+.titlePage{
+    @apply text-gray-600 text-2xl font-light
+}
+.navLink{
+    @apply  text-white block mb-2
+}
+.navLinkActive{
+    position: relative;
+    @apply  text-blue-300 font-bold block mb-2
+}
+.navLinkActive::before{
+    content: '';
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: calc(50% - 6px);
+    right: -1px;
+    border-radius: 50%;
+    filter: blur(5px);
+    @apply bg-blue-300
+}
+.navLinkActive::after{
+    content: '';
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: calc(50% - 5px);
+    right: 0;
+    border-radius: 50%;
+    border: 1px solid #4299e1;
+    @apply bg-blue-200
+}
