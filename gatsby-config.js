@@ -27,6 +27,15 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `Roboto\:300,300i,400,400i,500,700,900` // you can also specify font weights and styles
+        ],
+        display: 'swap'
+      }
+    }
     // {
     //   resolve: `gatsby-plugin-manifest`,
     //   options: {
