@@ -9,13 +9,16 @@ body{
     @apply text-gray-600 text-2xl font-light
 }
 .navLink{
-    @apply  text-white block mb-2
+    @apply  text-gray-500 block p-2 pl-4
+}
+.navLink:hover{
+    @apply  bg-gray-900 text-gray-300
 }
 .navLinkActive{
     position: relative;
-    @apply  text-blue-300 font-bold block mb-2
+    @apply  text-white font-medium block p-2 pl-4 bg-gray-700 
 }
-.navLinkActive::before{
+/* .navLinkActive::before{
     content: '';
     width: 12px;
     height: 12px;
@@ -36,4 +39,4 @@ body{
     border-radius: 50%;
     border: 1px solid #4299e1;
     @apply bg-blue-200
-}
+} */
