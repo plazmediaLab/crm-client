@@ -7,3 +7,5 @@
 // You can delete this file if you're not using it
 // Modular-CSS main style sheets
 import './src/utils/globals.css'
+
+export { wrapRootElement } from './src/config/wrap-root-element';
