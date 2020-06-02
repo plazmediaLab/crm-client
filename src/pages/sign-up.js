@@ -10,15 +10,15 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 // Apollo GraphQL
-import { useQuery, gql } from '@apollo/client';
+import { useMutation, gql } from '@apollo/client';
 
-const QUERY = gql`
-  query getProducts{
-    getProducts{
+const NEW_ACCOUNT = gql`
+  mutation newUser($input: UserInput){
+    newUser(input: $input){
       id
       name
-      exist
-      price
+      lastname
+      email
       created
     }
   }
@@ -26,8 +26,8 @@ const QUERY = gql`
 
 export default function SignUp(){
 
-  const { data, loading, error  } = useQuery(QUERY);
-  console.log(data);
+  // GraphQL Mutation
+  const [ newUser ] = useMutation(NEW_ACCOUNT);
 
   // Validación de formulario
   const formik = useFormik({
@@ -44,9 +44,27 @@ export default function SignUp(){
       email: Yup.string().email('The email is not valid').required('The email field is required'),
       password: Yup.string().required('The password field is required').min(6, 'The password must have at least 6 characters')
     }),
-    onSubmit: val => {
-      console.log('Send');
-      console.log(val);
+    onSubmit: async val => {
+      // console.log('Send');
+      // console.log(val);
+      const { name, lastname, email, password } = val;
+
+      try {
+        const data = await newUser({
+          variables:{
+            input: {
+              name,
+              lastname,
+              email,
+              password,
+            }
+          }
+        })
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+
     }
   })
 
