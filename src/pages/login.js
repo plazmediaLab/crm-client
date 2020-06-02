@@ -10,7 +10,7 @@ export default function Login(){
   return (
     <Layout>
 
-        <div className="grid justify-center align-middle my-3">
+        <div className="grid justify-center align-middle my-3 mt-6">
           <LogoWhite />
         </div>
 

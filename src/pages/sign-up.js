@@ -35,7 +35,7 @@ export default function SignUp(){
   return (
     <Layout>
 
-        <div className="grid justify-center align-middle mb-3">
+        <div className="grid justify-center align-middle mb-3 mt-6">
           <LogoWhite />
         </div>
 
