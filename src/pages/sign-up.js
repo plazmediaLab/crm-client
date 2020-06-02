@@ -9,7 +9,25 @@ import Error from '../components/messages/error';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
+// Apollo GraphQL
+import { useQuery, gql } from '@apollo/client';
+
+const QUERY = gql`
+  query getProducts{
+    getProducts{
+      id
+      name
+      exist
+      price
+      created
+    }
+  }
+`;
+
 export default function SignUp(){
+
+  const { data, loading, error  } = useQuery(QUERY);
+  console.log(data);
 
   // Validación de formulario
   const formik = useFormik({
