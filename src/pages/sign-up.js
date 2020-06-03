@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from '@reach/router';
+import { Link, useNavigate } from '@reach/router';
 
 import Layout from '../components/layout';
 import FormContainer from '../components/form-container';
@@ -8,6 +8,8 @@ import Error from '../components/messages/error';
 // Formik 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+// Sweet Alert
+import Swal from 'sweetalert2'
 
 // Apollo GraphQL
 import { useMutation, gql } from '@apollo/client';
@@ -29,6 +31,9 @@ export default function SignUp(){
   // GraphQL Mutation
   const [ newUser ] = useMutation(NEW_ACCOUNT);
 
+  // Reach Router Push
+  const push = useNavigate();
+
   // Validación de formulario
   const formik = useFormik({
     // Valores iniciales de los datos a validar
@@ -44,7 +49,7 @@ export default function SignUp(){
       email: Yup.string().email('The email is not valid').required('The email field is required'),
       password: Yup.string().required('The password field is required').min(6, 'The password must have at least 6 characters')
     }),
-    onSubmit: async val => {
+    onSubmit: async (val, { resetForm }) => {
       // console.log('Send');
       // console.log(val);
       const { name, lastname, email, password } = val;
@@ -60,11 +65,36 @@ export default function SignUp(){
             }
           }
         })
-        console.log(data);
-      } catch (error) {
-        console.log(error);
-      }
+        
+        resetForm({ val: '' })
 
+        Swal.fire({
+          icon: 'success',
+          title: 'User created successfully',
+          text: `Account by: ${data.data.newUser.name}`,
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 2500,
+          onClose: () => {
+            push('/login');
+          }
+        });
+
+        
+      } catch (error) {
+        console.log(error.message);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Oops...',
+          text: error.message,
+          showConfirmButton: false,
+          timer: 2000,
+          backdrop: false,
+          timerProgressBar: true,
+        })
+      }
+      
     }
   })
 
@@ -186,7 +216,7 @@ export default function SignUp(){
                 className="text-p_blue-500 underline"
                 title="Go to Login"
               >
-                Login
+                Log in
               </Link>
             </p>
 
