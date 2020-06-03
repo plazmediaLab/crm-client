@@ -82,7 +82,7 @@ export default function SignUp(){
 
         
       } catch (error) {
-        console.log(error.message);
+
         Swal.fire({
           position: 'top-end',
           icon: 'error',
@@ -93,6 +93,7 @@ export default function SignUp(){
           backdrop: false,
           timerProgressBar: true,
         })
+        
       }
       
     }
