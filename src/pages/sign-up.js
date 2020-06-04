@@ -55,7 +55,7 @@ export default function SignUp(){
       const { name, lastname, email, password } = val;
 
       try {
-        const data = await newUser({
+        const { data } = await newUser({
           variables:{
             input: {
               name,
@@ -66,12 +66,12 @@ export default function SignUp(){
           }
         })
         
-        resetForm({ val: '' })
+        // resetForm({ val: '' })
 
         Swal.fire({
           icon: 'success',
           title: 'User created successfully',
-          text: `Account by: ${data.data.newUser.name}`,
+          text: `Account by: ${data.newUser.name}`,
           showConfirmButton: false,
           timerProgressBar: true,
           timer: 2500,

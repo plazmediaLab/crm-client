@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 
 import { ModularCSSfonstRequired } from 'modular-css';
-import Favicon from '../images/isotype-white-64px.png';
+import Favicon from '../images/isotype-white-32px.png';
 
 export default function Seo(){
   return (

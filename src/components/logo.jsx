@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../images/imagotype.svg';
+import logo from '../images/imagotype-dark.svg';
 import { css } from '@emotion/core';
 
 export default function Logo({ height = "24px" }){

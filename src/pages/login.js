@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from '@reach/router';
+import { Link, useNavigate } from '@reach/router';
 
 import Layout from "../components/layout";
 import FormContainer from '../components/form-container';
@@ -24,6 +24,9 @@ const USER_AUTH = gql`
 
 export default function Login(){
 
+  // Reach Router
+  const push = useNavigate()
+
   // Utenticar Usuario
   const [ authUser ] = useMutation(USER_AUTH);
 
@@ -43,19 +46,34 @@ export default function Login(){
     onSubmit: async val => {
 
       const { email, password } = val;
-
+      
       try {
-        const data = await authUser({
-          variables: {
-            input: {
-              email,
-              password
-            }
+        
+      // Query a la DB
+      const { data } = await authUser({
+        variables: {
+          input: {
+            email,
+            password
           }
-        })
+        }
+      })
 
-        console.log(data);
-        localStorage.setItem('token', data.data.authUser.token)
+      // Almacenar Token en Local Storage
+      localStorage.setItem('token', data.authUser.token);
+
+      // Mostrar SweetAlert y redireccionar al finalizar
+      Swal.fire({
+        position: 'center',
+        title: 'Successfully authenticated',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+        onClose: () => {
+          push('/');
+        }
+      })
 
       } catch (error) {
 
