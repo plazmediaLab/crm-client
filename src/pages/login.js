@@ -40,7 +40,8 @@ export default function Login(){
     // validadiones de los campos con Yup
     validationSchema: Yup.object({
       email: Yup.string().email('The Email is not valid').required('The email field is required'),
-      password: Yup.string().required('The password field is required').min(6, 'The password must have at least 6 characters')
+      // TODO · Cambiar a minimo 6 caracteres 06/03/2020 
+      password: Yup.string().required('The password field is required').min(3, 'The password must have at least 6 characters')
     }),
     // Función Submit
     onSubmit: async val => {
@@ -60,15 +61,15 @@ export default function Login(){
       })
 
       // Almacenar Token en Local Storage
-      localStorage.setItem('token', data.authUser.token);
+      localStorage.setItem('pm-token', data.authUser.token);
 
       // Mostrar SweetAlert y redireccionar al finalizar
       Swal.fire({
         position: 'center',
-        title: 'Successfully authenticated',
+        title: 'Loading...',
         icon: 'success',
         showConfirmButton: false,
-        timer: 1500,
+        timer: 2000,
         timerProgressBar: true,
         onClose: () => {
           push('/');

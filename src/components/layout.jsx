@@ -26,7 +26,7 @@ export default function Layout( props ){
 
           <SideBar />
 
-          <main className="sm:w-2/3 xl:w-4/5 sm:min-h-screen p-3">
+          <main className="sm:w-2/3 xl:w-4/5 sm:min-h-screen px-5">
 
             { props.children }
 
