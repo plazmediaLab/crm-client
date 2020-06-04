@@ -1,5 +1,6 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import fetch from 'isomorphic-fetch';
+// import fetch from 'node-fetch';
 import { setContext } from 'apollo-link-context';
 
 // creamos nuestro HttpLink con la conexión a Apollo Server
@@ -17,7 +18,8 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : ''
+      authorization: token ? `Bearer ${token}` : '',
+      Plazmedia_Process: 'Request send...'
     }
   }
 });

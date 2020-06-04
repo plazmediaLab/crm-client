@@ -3,6 +3,7 @@ import React from "react";
 import Layout from "../components/layout";
 // Apollo Client 
 import { useQuery, gql } from '@apollo/client';
+// import { useQuery, gql } from '@apollo/react-hooks';
 
 const GET_SELLER_CLIENTS = gql`
   query getSellerClients{
@@ -20,41 +21,45 @@ const IndexPage = () => {
 
   // Consulta a Apollo
   const { data, loading, error } = useQuery(GET_SELLER_CLIENTS);
-  // console.log(data);
+
+  // Proteger el no acceder a DATA antes de que obtenga resultados
+  if(loading) return null;
+  
+  console.log(data);
 
   return (
     <Layout>
-
-      { loading ? 'loading...' : (
       
-        <>
-          <h2 className="titlePage py-3">Clients</h2>
-          
-          <table class="table-auto shadow-md w-full w-lg">
-            <thead className="bg-white">
-              <tr className="text-carbon-500 text-left font-medium text-sm">
-                <th class="w-1/5 px-4 py-3 border border-b-2 border-gray-400">Name</th>
-                <th class="w-1/5 px-4 py-3 border border-b-2 border-gray-400">Company</th>
-                <th class="w-1/5 px-4 py-3 border border-b-2 border-gray-400">Email</th>
-              </tr>
-            </thead>
-            <tbody className="text-sm bg-white">
-              { data.getSellerClients.map(client => (
-                
-                <tr key={client.id}>
-                  <td class="border px-4 py-3 border border-gray-400">{ `${client.name} ${client.lastname}`  }</td>
-                  <td class="border px-4 py-3 border border-gray-400">{ client.company }</td>
-                  <td class="border px-4 py-3 border border-gray-400">{ client.email }</td>
+        { loading ? (
+          <p>Loading...</p>
+        ) : (
+          <>  
+            <h2 className="titlePage">Clients</h2>
+            <p className="text-sm text-gray-600">Your client list: ( <span className="font-semibold">{ data.getSellerClients.length }</span> )</p>
+            
+            <table className="table-auto w-full w-lg">
+              <thead>
+                <tr className="text-carbon-500 font-medium text-xs">
+                  <th className="w-1/5 px-4 py-3 border-gray-400">Name</th>
+                  <th className="w-1/5 px-4 py-3 border-gray-400">Company</th>
+                  <th className="w-1/5 px-4 py-3 border-gray-400">Email</th>
                 </tr>
+              </thead>
+              <tbody className="text-sm bg-white shadow-md text-center">
+                { data.getSellerClients.map(client => (
+                  
+                  <tr key={client.id}>
+                    <td className="border px-4 py-3 border border-gray-400 text-left">{ `${client.name} ${client.lastname}`  }</td>
+                    <td className="border px-4 py-3 border border-gray-400">{ client.company }</td>
+                    <td className="border px-4 py-3 border border-gray-400">{ client.email }</td>
+                  </tr>
 
-              )) }
-            </tbody>
-          </table>
-        </>
+                )) }
+              </tbody>
+            </table>
+          </>
+        ) }
 
-      )}
-
-      
     </Layout>
   )
 }

@@ -1,6 +1,8 @@
 import React from 'react';
 import Seo from './seo';
 import SideBar from './sideBar';
+// Components
+import Header from './header';
 // Reach Router
 import { useLocation } from '@reach/router';
 
@@ -10,7 +12,7 @@ export default function Layout( props ){
 
   return (
     <>
-      <Seo />
+      <Seo /> 
 
       { location.pathname === '/login' || location.pathname === '/sign-up' ? (
 
@@ -26,9 +28,15 @@ export default function Layout( props ){
 
           <SideBar />
 
-          <main className="sm:w-2/3 xl:w-4/5 sm:min-h-screen px-5">
+          <main className="sm:w-2/3 xl:w-4/5 sm:min-h-screen">
 
-            { props.children }
+            <Header />
+
+            <div className="px-5 py-3">
+              
+              { props.children }
+
+            </div>
 
           </main>
 
