@@ -14,6 +14,9 @@ const authLink = setContext((_, { headers }) => {
 
   // leer el token creado con el Login en el Local Storage
   const token = localStorage.getItem('pm-token');
+  // if(!token){
+  //   client.resetStore()
+  // }
 
   return {
     headers: {
@@ -25,7 +28,8 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  cache: new InMemoryCache(), 
+  ssr: true,
+  cache: new InMemoryCache().restore(window.__APOLLO_STATE__), 
   // Agregamos nuestro HttpLink creado con nuestro header
   // Y lo concatenamos con la conexxión a Apollo
   link: authLink.concat( httpLink )

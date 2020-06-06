@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link, useNavigate } from '@reach/router';
 
+// Components
 import Layout from "../components/layout";
 import FormContainer from '../components/form-container';
 import LogoWhite from '../components/logo-white';
+import Error from '../components/messages/error';
 // Formik 
 import { useFormik } from 'formik';
 import * as Yup from 'yup'; 
@@ -11,8 +13,6 @@ import * as Yup from 'yup';
 import { useMutation, gql } from '@apollo/client';
 // Sweet Alert
 import Swal from 'sweetalert2'
-// Components
-import Error from '../components/messages/error';
 
 const USER_AUTH = gql`
   mutation authUser($input: AuthInput){
@@ -24,8 +24,7 @@ const USER_AUTH = gql`
 
 export default function Login(){
 
-  // Reach Router
-  const push = useNavigate()
+  const push = useNavigate();
 
   // Utenticar Usuario
   const [ authUser ] = useMutation(USER_AUTH);
