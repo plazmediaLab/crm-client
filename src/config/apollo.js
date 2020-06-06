@@ -29,7 +29,7 @@ const authLink = setContext((_, { headers }) => {
 
 const client = new ApolloClient({
   ssr: true,
-  cache: new InMemoryCache().restore(window.__APOLLO_STATE__), 
+  cache: new InMemoryCache(), 
   // Agregamos nuestro HttpLink creado con nuestro header
   // Y lo concatenamos con la conexxión a Apollo
   link: authLink.concat( httpLink )

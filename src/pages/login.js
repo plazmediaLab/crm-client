@@ -153,7 +153,7 @@ export default function Login(){
 
             <input 
               type="submit"
-              className="primary-button mt-5"
+              className="primary-button p-3 w-full mt-5"
               value="Login"
             />
 

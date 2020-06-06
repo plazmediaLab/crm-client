@@ -38,7 +38,7 @@ export default function TableClients(){
       <h2 className="titlePage">Clients</h2>
       {/* <p className="text-sm text-gray-600">Your client list: ( <span className="font-semibold">{ data.getSellerClients.length }</span> )</p> */}
       
-      <table className="table-auto w-full w-lg">
+      <table className="table-auto w-full">
         <thead>
           <tr className="text-carbon-500 font-medium text-xs">
             <th className="w-1/5 px-4 py-3 border-gray-400">Name</th>
