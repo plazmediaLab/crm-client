@@ -1,5 +1,5 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
-import fetch from 'isomorphic-fetch';
+import fetch from 'node-fetch';
 // import fetch from 'node-fetch';
 import { setContext } from 'apollo-link-context';
 
@@ -14,9 +14,6 @@ const authLink = setContext((_, { headers }) => {
 
   // leer el token creado con el Login en el Local Storage
   const token = localStorage.getItem('pm-token');
-  // if(!token){
-  //   client.resetStore()
-  // }
 
   return {
     headers: {
@@ -28,7 +25,6 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  ssr: true,
   cache: new InMemoryCache(), 
   // Agregamos nuestro HttpLink creado con nuestro header
   // Y lo concatenamos con la conexxión a Apollo

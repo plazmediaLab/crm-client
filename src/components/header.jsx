@@ -25,17 +25,18 @@ export default function Header(){
 
   // Si no hay información de un usuario autenticado
   if(!data.getUser){
-    return push('/login');
+    push('/login', { replace: true });
   }
 
   //
   const logUt = () => {
     // Eliminar Token del Local Storage
-    localStorage.removeItem('pm-token');
-
-    client.clearStore()
+    
     // Redireccionar al Login 
-    push('/login');
+    push('/login', { replace: true }).then(() => {
+      localStorage.removeItem('pm-token');
+      client.resetStore()
+    });
   }; 
 
   return (

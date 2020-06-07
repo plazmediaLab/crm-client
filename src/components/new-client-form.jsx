@@ -81,7 +81,7 @@ export default function NewClientForm(){
 
   return (
     <>
-      <h1 className="text-center text-xs font-medium bg-gray-300 text-gray-600 uppercase p-2 mt-2">Add new client</h1>
+      <h1 className="text-center text-xs font-medium bg-gray-300 text-gray-600 uppercase p-2 mt-3">Add new client</h1>
 
       <form
         className="my-2 bg-white p-4 shadow-md"

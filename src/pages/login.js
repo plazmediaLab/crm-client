@@ -49,35 +49,36 @@ export default function Login(){
       
       try {
         
-      // Query a la DB
-      const { data } = await authUser({
-        variables: {
-          input: {
-            email,
-            password
+        // Query a la DB
+        const { data } = await authUser({
+          variables: {
+            input: {
+              email,
+              password
+            }
           }
-        }
-      })
+        })
 
-      // Almacenar Token en Local Storage
-      localStorage.setItem('pm-token', data.authUser.token);
+        // Almacenar Token en Local Storage
+        localStorage.setItem('pm-token', data.authUser.token);
 
-      // Mostrar SweetAlert y redireccionar al finalizar
-      Swal.fire({
-        position: 'center',
-        title: 'Loading...',
-        icon: 'success',
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        onClose: () => {
-          push('/');
-        }
-      })
+        // Mostrar SweetAlert y redireccionar al finalizar
+        Swal.fire({
+          position: 'center',
+          title: 'Loading...',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          onAfterClose: () => {
+            push('/');
+          }
+        })
 
       } catch (error) {
 
         Swal.fire({
+          toast: true,
           position: 'top-end',
           icon: 'error',
           title: 'Oops...',
