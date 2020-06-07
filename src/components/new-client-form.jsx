@@ -20,13 +20,39 @@ const NEW_CLIENT = gql`
   }
 `;
 
+const GET_SELLER_CLIENTS = gql`
+  query getSellerClients{
+    getSellerClients{
+      id
+      name
+      lastname
+      company
+      email
+    }
+  }
+`;
+
 export default function NewClientForm(){
 
   const [activeform, setActiveForm] = useState(true);
   const mainInput = useRef(null);
 
   // mutation para nuevo cliente
-  const [ newClient ] = useMutation(NEW_CLIENT);
+  const [ newClient ] = useMutation(NEW_CLIENT,
+    {
+      update(cache, { data: { newClient } }) {
+        // obtener el objeto de cache que deseamos actualizar
+        const { getSellerClients } = cache.readQuery({ query: GET_SELLER_CLIENTS });
+        // Reescribimos el cache ( el cache nunca se debe modificar )
+        cache.writeQuery({
+          query: GET_SELLER_CLIENTS,
+          data: { 
+            getSellerClients: [ ...getSellerClients, newClient ]
+          },
+        });
+      }
+    }
+  );
 
   // Validación de formulario con Formik
   const formik = useFormik({
