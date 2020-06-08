@@ -62,9 +62,7 @@ export default function TableClientRow({ client, index }){
               id
             }
           })
-    
-          console.log(data.deleteClient);
-    
+        
         } catch (error) {
           console.log(error);
         }

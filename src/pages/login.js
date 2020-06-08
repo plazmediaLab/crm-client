@@ -76,10 +76,11 @@ export default function Login(){
           showConfirmButton: false,
           timer: 2000,
           timerProgressBar: true,
-          onAfterClose: () => {
-            push('/');
-          }
+          // onAfterClose: () => {
+          // }
         })
+        
+        push('/');
 
       } catch (error) {
 
