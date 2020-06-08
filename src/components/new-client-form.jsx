@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 // Apollo Client
 import { useMutation, gql } from '@apollo/client';
+import Success from './messages/success';
 
 const NEW_CLIENT = gql`
   mutation newClient($input: ClientInput){
@@ -35,6 +36,8 @@ const GET_SELLER_CLIENTS = gql`
 export default function NewClientForm(){
 
   const [activeform, setActiveForm] = useState(true);
+  const [succesmsn, setSuccessMsn] = useState(false);
+  const [errormsn, setErrorsMsn] = useState('');
   const mainInput = useRef(null);
 
   // mutation para nuevo cliente
@@ -69,16 +72,11 @@ export default function NewClientForm(){
       company: Yup.string().required('This company field is required'),
       email: Yup.string().required('This email field is required').email('The Email is not valid'),
     }),
-    onSubmit: async values => {
+    onSubmit: async (values, { resetForm }) => {
       const { name, lastname, company, email, phone } = values;
-      console.log(name);
-      console.log(lastname);
-      console.log(company);
-      console.log(email);
-      console.log(phone);
 
       try {
-        const { data } = await newClient({
+        await newClient({
           variables: {
             input: {
               name,
@@ -88,11 +86,26 @@ export default function NewClientForm(){
               phone
             }
           }
-        })
-  
-        console.log(data);
+        });
+
+        // Activar el mensaje de agregado
+        setSuccessMsn(true);
+        
+        // Resetear el formulario
+        resetForm({ val: '' })
+        // Focus al formulario para agregar otro cliente
+        mainInput.current.focus();
+        
+        setTimeout(() => {
+          // Desactivar el mensaje de agregado
+          setSuccessMsn(false);
+        }, 4000);
+
       } catch (error) {
-        console.log(error);
+        setErrorsMsn(error.message);
+        setTimeout(() => {
+          setErrorsMsn('');
+        }, 4000);
       }
     }
   })
@@ -115,17 +128,33 @@ export default function NewClientForm(){
       >
 
         { activeform ? (
-          <button 
-            type="button" 
-            className="text-sm text-green-500 font-semibold flex justify-center items-center w-full p-2 rounded hover:bg-green-500 hover:text-white"
-            onClick={ () => ActiveForm() }
-          >
-            <svg className="w-5 h-5 mr-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            Add new client
-          </button>
+          <>
+            <button 
+              type="button" 
+              className="text-sm text-green-500 font-semibold flex justify-center items-center w-full p-2 rounded hover:bg-green-500 hover:text-white"
+              onClick={ () => ActiveForm() }
+            >
+              <svg className="w-5 h-5 mr-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              New client
+            </button>
+          </>
         ) : (
           <>
             <div className="mb-2">
+
+              {succesmsn ? (
+                <Success 
+                  message='Customer added'
+                  mb='mb-2'
+                />
+              ) : null}
+              {errormsn ? (
+                <Error 
+                  message={errormsn}
+                  mb='mb-2'
+                />
+              ) : null}
+
               <input 
                 ref={mainInput}
                 id="name"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Link, useNavigate } from '@reach/router';
 
 // Components
@@ -25,6 +25,12 @@ const USER_AUTH = gql`
 export default function Login(){
 
   const push = useNavigate();
+  const mainInput = useRef(null);
+
+  // Focus a input al montar el componete
+  useEffect(() => {
+    mainInput.current.focus();
+  }, []);
 
   // Utenticar Usuario
   const [ authUser ] = useMutation(USER_AUTH);
@@ -113,6 +119,7 @@ export default function Login(){
                 Email
               </label>
               <input 
+                ref={mainInput}
                 id="email"
                 type="text"
                 placeholder="Write your email"

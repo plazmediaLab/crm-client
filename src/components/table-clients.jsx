@@ -2,6 +2,9 @@ import React from 'react';
 import { useNavigate } from '@reach/router'
 // Apollo Client 
 import { useQuery, gql } from '@apollo/client';
+import TableClientRow from './table-client-row';
+
+// import * as moment from 'moment';
 
 const GET_SELLER_CLIENTS = gql`
   query getSellerClients{
@@ -35,26 +38,28 @@ export default function TableClients(){
 
   return (
     <>
-      <h2 className="titlePage">Clients</h2>
-      {/* <p className="text-sm text-gray-600">Your client list: ( <span className="font-semibold">{ data.getSellerClients.length }</span> )</p> */}
+      <div className="flex items-center justify-between">
+        <h2 className="titlePage">Clients</h2>
+        <p className="text-sm text-gray-600">Your client list: ( <span className="font-semibold">{ data.getSellerClients.length }</span> )</p>
+        {/* <p className="text-sm text-gray-600"> { time } </p> */}
+      </div>
       
-      <table className="table-auto w-full">
+      <table className="table-auto w-full mt-6">
         <thead>
           <tr className="text-carbon-500 font-medium text-xs">
-            <th className="w-1/5 px-4 py-3 border-gray-400">Name</th>
-            <th className="w-1/5 px-4 py-3 border-gray-400">Company</th>
-            <th className="w-1/5 px-4 py-3 border-gray-400">Email</th>
+            <th className="w-1/12 px-4 py-3 border-gray-400">#</th>
+            <th className="px-4 py-3 border-gray-400">Name</th>
+            <th className="px-4 py-3 border-gray-400">Company</th>
+            <th className="px-4 py-3 border-gray-400">Email</th>
+            <th className="w-2/12 px-4 py-3 border-gray-400">Actions</th>
           </tr>
         </thead>
         <tbody className="text-sm bg-white shadow-md text-center">
-          { data.getSellerClients.map(client => (
-            
-            <tr key={client.id}>
-              <td className="border px-4 py-3 border border-gray-400 text-left">{ `${client.name} ${client.lastname}`  }</td>
-              <td className="border px-4 py-3 border border-gray-400">{ client.company }</td>
-              <td className="border px-4 py-3 border border-gray-400">{ client.email }</td>
-            </tr>
-
+          { data.getSellerClients.map((client, index) => (
+            <TableClientRow 
+              client={ client }
+              index={ index }
+            />
           )) }
         </tbody>
       </table>

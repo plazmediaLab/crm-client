@@ -65,8 +65,6 @@ export default function SignUp(){
             }
           }
         })
-        
-        // resetForm({ val: '' })
 
         Swal.fire({
           icon: 'success',
