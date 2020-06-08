@@ -57,7 +57,7 @@ export default function TableClientRow({ client, index }){
       if (result.value) {
 
         try {
-          const { data } = await deleteClient({
+          await deleteClient({
             variables: {
               id
             }

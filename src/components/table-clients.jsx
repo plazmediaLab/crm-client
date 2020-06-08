@@ -40,8 +40,7 @@ export default function TableClients(){
     <>
       <div className="flex items-center justify-between">
         <h2 className="titlePage">Clients</h2>
-        <p className="text-sm text-gray-600">Your client list: ( <span className="font-semibold">{ data.getSellerClients.length }</span> )</p>
-        {/* <p className="text-sm text-gray-600"> { time } </p> */}
+        <p className="text-sm text-gray-600">Your client list: ( <span className="font-semibold">{ data.getSellerClients.length }</span> )</p>      
       </div>
       
       <table className="table-auto w-full mt-6">
