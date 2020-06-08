@@ -14,6 +14,7 @@ const GET_SELLER_CLIENTS = gql`
       lastname
       company
       email
+      phone
     }
   }
 `;

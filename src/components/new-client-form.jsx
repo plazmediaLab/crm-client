@@ -147,7 +147,7 @@ export default function NewClientForm(){
             <div className="mb-2">
 
               {succesmsn ? (
-                <Success 
+                <Success  
                   message='Customer added'
                   mb='mb-2'
                 />

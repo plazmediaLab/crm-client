@@ -4,7 +4,6 @@ import Clock from 'react-live-clock';
 import * as moment from 'moment';
 
 const m = moment().get('H');
-console.log(m);
 
 export default function LiveClock(){
   return (

@@ -4,6 +4,8 @@ import { useMutation, gql } from '@apollo/client';
 // Sweet Alert
 import Swal from 'sweetalert2';
 
+import { Link, useNavigate } from '@reach/router';
+
 const DELETE_CLIENT = gql`
   mutation deleteClient($id: ID!){
     deleteClient(id: $id)
@@ -24,6 +26,7 @@ const GET_SELLER_CLIENTS = gql`
 
 export default function TableClientRow({ client, index }){
 
+  const push = useNavigate();
   const { id } = client;
 
   // Mutation para eliminar cliente
@@ -77,7 +80,7 @@ export default function TableClientRow({ client, index }){
 
   };
   const EditClient = (ID) => {
-    console.log(ID);
+    push(`/edit-client`, { state: { client: client } });
   };
 
   return (
