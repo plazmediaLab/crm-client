@@ -119,7 +119,7 @@ export default function SignUp(){
               <input 
                 id="name"
                 type="text"
-                placeholder="Write your email"
+                placeholder="Write your name"
                 className="appearance-none border border-bluegray-100 rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 value={formik.values.name}
                 onChange={formik.handleChange}
@@ -142,7 +142,7 @@ export default function SignUp(){
               <input 
                 id="lastname"
                 type="text"
-                placeholder="Write your email"
+                placeholder="Write your last name"
                 className="appearance-none border border-bluegray-100 rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 value={formik.values.lastname}
                 onChange={formik.handleChange}

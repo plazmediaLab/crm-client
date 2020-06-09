@@ -6,7 +6,6 @@ import * as Yup from 'yup';
 // Apollo Client
 import { useMutation, gql } from '@apollo/client';
 import Success from './messages/success';
-import LiveClock from './clock';
 
 const NEW_CLIENT = gql`
   mutation newClient($input: ClientInput){
@@ -121,8 +120,6 @@ export default function NewClientForm(){
 
   return (
     <>
-
-      <LiveClock />
 
       <h1 className="text-center text-xs font-medium bg-gray-300 text-gray-600 uppercase p-2 mt-3">Add new client</h1>
 

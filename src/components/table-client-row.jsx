@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 // Apollo Client
 import { useMutation, gql } from '@apollo/client';
 // Sweet Alert
 import Swal from 'sweetalert2';
 
-import { Link, useNavigate } from '@reach/router';
+import { useNavigate } from '@reach/router';
 
 const DELETE_CLIENT = gql`
   mutation deleteClient($id: ID!){

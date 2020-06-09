@@ -6,6 +6,15 @@ body{
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
 }
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
 .titlePage{
     @apply text-gray-600 text-2xl font-light
 }
