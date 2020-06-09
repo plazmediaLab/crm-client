@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // Apollo Client
 import { useMutation, gql } from '@apollo/client';
 // Sweet Alert
@@ -46,7 +46,6 @@ export default function TableClientRow({ client, index }){
   });
 
   const DeletClient = (ID) => {
-    console.log(ID);
 
     Swal.fire({
       title: 'Are you sure?',
@@ -90,6 +89,7 @@ export default function TableClientRow({ client, index }){
           <td className="border px-3 py-3 border border-gray-400 text-left">{ `${client.name} ${client.lastname}`  }</td>
           <td className="border px-3 py-3 border border-gray-400">{ client.company }</td>
           <td className="border px-3 py-3 border border-gray-400">{ client.email }</td>
+          <td className="border px-3 py-3 border border-gray-400">{ client.phone ? client.phone : 'N/A' }</td>
           <td className="border px-3 py-3 border border-gray-400">
             <button 
               type="button"

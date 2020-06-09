@@ -163,7 +163,7 @@ export default function NewClientForm(){
                 ref={mainInput}
                 id="name"
                 type="text"
-                placeholder="Name"
+                placeholder="* Name"
                 className="inner-form"
                 value={formik.values.name}
                 onChange={formik.handleChange}
@@ -180,7 +180,7 @@ export default function NewClientForm(){
               <input 
                 id="lastname"
                 type="text"
-                placeholder="Last name"
+                placeholder="* Last name"
                 className="inner-form"            
                 value={formik.values.lastname}
                 onChange={formik.handleChange}
@@ -197,7 +197,7 @@ export default function NewClientForm(){
               <input 
                 id="company"
                 type="text"
-                placeholder="Company"
+                placeholder="* Company"
                 className="inner-form"            
                 value={formik.values.company}
                 onChange={formik.handleChange}
@@ -214,7 +214,7 @@ export default function NewClientForm(){
               <input 
                 id="email"
                 type="text"
-                placeholder="Email"
+                placeholder="* Email"
                 className="inner-form"            
                 value={formik.values.email}
                 onChange={formik.handleChange}
@@ -262,6 +262,13 @@ export default function NewClientForm(){
         ) }
 
       </form>
+
+      { !activeform ? (
+        <p className="tetx-xs text-gray-500 text-center py-3">
+          The fields with (*) are required and cannot remain empty to be saved.
+        </p>
+      ) : null }
+
     </>
   );
 };
