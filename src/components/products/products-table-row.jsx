@@ -1,6 +1,77 @@
 import React from 'react';
+// Apollo Client
+import { useMutation, gql } from '@apollo/client';
+// Sweet Alert
+import Swal from 'sweetalert2';
+
+const DELETE_PRODUCT = gql`
+  mutation deleteProduct($id: ID!){
+    deleteProduct(id: $id)
+  }
+`;
+const GET_PRODUCTS = gql`
+  query{
+    getProducts{
+      id
+    }
+  }
+`;
 
 export default function ProductsTableRow({ product, index }){
+
+  // Mutation para eliminar producto
+  const [ deleteProduct ] = useMutation(DELETE_PRODUCT,
+    {
+      update(cache){
+      // Obtener una copia del objeto de cache
+      const { getProducts } = cache.readQuery({ query: GET_PRODUCTS });
+
+      // Re-escribir el cache
+      cache.writeQuery({
+        query: GET_PRODUCTS,
+        data: {
+          getProducts: getProducts.filter( actualProduct => actualProduct.id !== product.id )
+        }
+      })}
+    }
+  );
+
+  const DeleteProductItem = ID => {
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "This action cannot be reversed!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then( async (result) => {
+      if (result.value) {
+
+        // Eliminar producto
+        try {
+
+          const { data } = await deleteProduct({
+            variables: {
+              id: ID
+            }
+          });
+      
+          Swal.fire(
+            'Deleted!',
+            `${data.deleteProduct}.`,
+            'success'
+          )
+
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    })
+    
+  };
+
   return (  
     <tr key={product.id}>
       <td className="border px-3 py-3 border border-gray-400 font-semibold">{ index + 1 }</td>
@@ -20,7 +91,7 @@ export default function ProductsTableRow({ product, index }){
           type="button"
           title='Delete client'
           className="text-xs py-2 px-3 rounded text-red-600 hover:bg-gray-300"
-          // onClick={() => DeletClient(id)}
+          onClick={() => DeleteProductItem(product.id)}
         >
           <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         </button>

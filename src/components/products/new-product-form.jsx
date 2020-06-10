@@ -17,11 +17,35 @@ const NEW_PRODUCT = gql`
     }
   }
 `;
+const GET_PRODUCTS = gql`
+  query{
+    getProducts{
+      id
+      name
+      exist
+      price
+    }
+  }
+`;
 
 export default function NewProductForm(){
 
   // Apollo mutation
-  const [ newProduct ] = useMutation(NEW_PRODUCT);
+  const [ newProduct ] = useMutation(NEW_PRODUCT, 
+    {
+      update(cache, { data: { newProduct } }) {
+        // obtener el objeto de cache que deseamos actualizar
+        const { getProducts } = cache.readQuery({ query: GET_PRODUCTS });
+        // Reescribimos el cache ( el cache nunca se debe modificar )
+        cache.writeQuery({
+          query: GET_PRODUCTS,
+          data: { 
+            getProducts: [ ...getProducts, newProduct ]
+          },
+        });
+      }
+    }  
+  );
 
   // Formik Validar formulario
   const formik = useFormik({
@@ -35,10 +59,12 @@ export default function NewProductForm(){
       exist: Yup.number().positive('Quantity has to be positive').integer('The quantity has to be an integer').required('Quantity in stock field is required'),
       price: Yup.number().positive('Quantity has to be positive').required('The price field is required'),
     }),
-    onSubmit: async values => {
+    onSubmit: async (values, { resetForm }) => {
       const { name, exist, price } = values;
 
       try {
+
+        // Mutation
         await newProduct({
           variables:{
             input: {
@@ -49,6 +75,7 @@ export default function NewProductForm(){
           }
         });
         
+        // Sweed Alert
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -62,12 +89,15 @@ export default function NewProductForm(){
           }
         });
 
+        // Resetear el formulario
+        resetForm({ initialValues: '' });
+
       } catch (error) {
         console.log(error);
       }
 
     }  
-  })
+  });
 
   return (
     <>
@@ -77,7 +107,6 @@ export default function NewProductForm(){
       >
         <div className="col-span-6">
           <input 
-            required
             id="name"
             type="text"
             placeholder="* Write the product name"
@@ -89,7 +118,6 @@ export default function NewProductForm(){
         </div>
         <div className="col-span-2">
           <input 
-            required
             id="exist"
             type="number"
             title="Quantity in stock"
@@ -102,7 +130,6 @@ export default function NewProductForm(){
         </div>
         <div className="col-span-2">
           <input 
-            required
             id="price"
             type="number"
             title="Price by unit"
