@@ -17,7 +17,7 @@ const GET_PRODUCTS = gql`
   }
 `;
 
-export default function ProductsTableRow({ product, index }){
+export default function ProductsTableRow({ edit, product, index, setEdit, setProduct }){
 
   // Mutation para eliminar producto
   const [ deleteProduct ] = useMutation(DELETE_PRODUCT,
@@ -69,7 +69,26 @@ export default function ProductsTableRow({ product, index }){
         }
       }
     })
-    
+  };
+  const EditProductItem = () => {
+
+    if(!edit){
+      setEdit(true);
+      setProduct(product);
+    }else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'There is already a product in edition, press "cancel" to ignore the changes, to be able to edit another product.!',
+        showConfirmButton: false,
+        timer: 4000,
+        timerProgressBar: true,
+        onOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+    }
   };
 
   return (  
@@ -83,7 +102,7 @@ export default function ProductsTableRow({ product, index }){
           type="button"
           title='Edit client'
           className="text-xs py-2 px-3 rounded text-p_blue-500 hover:bg-gray-300"
-          // onClick={() => EditClient(id)}
+          onClick={() => EditProductItem()}
         >
           <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
         </button>

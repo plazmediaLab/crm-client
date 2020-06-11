@@ -14,7 +14,7 @@ const GET_PRODUCTS = gql`
   }
 `;
 
-export default function ProductsTable(){
+export default function ProductsTable({ edit, setEdit, setProduct }){
 
   // Query para obtener productos
   const { data, loading, error } = useQuery(GET_PRODUCTS);
@@ -38,6 +38,9 @@ export default function ProductsTable(){
           <ProductsTableRow 
             product={ product }
             index={ index }
+            edit={ edit }
+            setEdit={ setEdit }
+            setProduct={ setProduct }
           />
         )) }
       </tbody>
