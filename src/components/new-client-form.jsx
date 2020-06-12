@@ -6,6 +6,16 @@ import * as Yup from 'yup';
 // Apollo Client
 import { useMutation, gql } from '@apollo/client';
 import Success from './messages/success';
+// Styled component
+import styled from '@emotion/styled';
+import { keyframes } from '@emotion/core';
+import { fadeInDown } from 'react-animations';
+
+const bAniDown = keyframes`${fadeInDown}`;
+ 
+const BouncyDiv = styled.div`
+  animation: .2s ${bAniDown};
+`;
 
 const NEW_CLIENT = gql`
   mutation newClient($input: ClientInput){
@@ -124,7 +134,7 @@ export default function NewClientForm(){
       <h1 className="text-center text-xs font-medium bg-gray-300 text-gray-600 uppercase p-2 mt-3">Add new client</h1>
 
       <form
-        className="my-2 bg-white p-4 shadow-md"
+        className="my-2 bg-white p-4 shadow-md overflow-y-hidden"
         onSubmit={formik.handleSubmit}
       >
 
@@ -140,7 +150,7 @@ export default function NewClientForm(){
             </button>
           </>
         ) : (
-          <>
+          <BouncyDiv>
             <div className="mb-2">
 
               {succesmsn ? (
@@ -255,7 +265,7 @@ export default function NewClientForm(){
             >
               Cancel
             </button>
-          </>
+          </BouncyDiv>
         ) }
 
       </form>

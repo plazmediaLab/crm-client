@@ -9,6 +9,16 @@ import Error from '../messages/error';
 // Sweet Alert
 import Swal from 'sweetalert2'; 
 
+import styled from '@emotion/styled';
+import { keyframes } from '@emotion/core';
+import { flipInX } from 'react-animations';
+
+const bAniDown = keyframes`${flipInX}`;
+ 
+const BouncyDiv = styled.div`
+  animation: .3s ${bAniDown};
+`;
+
 const NEW_PRODUCT = gql`
   mutation newProduct($input: ProductInput){
     newProduct(input: $input){
@@ -100,7 +110,7 @@ export default function NewProductForm(){
   });
 
   return (
-    <>
+    <BouncyDiv>
       <form 
         className="grid grid-cols-12 gap-3 mt-3"
         onSubmit={formik.handleSubmit}
@@ -177,6 +187,6 @@ export default function NewProductForm(){
           ) : null }
         </div>
       </div>
-    </>
+    </BouncyDiv>
   );
 };

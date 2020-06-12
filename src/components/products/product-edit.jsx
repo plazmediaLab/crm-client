@@ -9,6 +9,16 @@ import Error from '../messages/error';
 // Sweet Alert
 import Swal from 'sweetalert2';
 
+import styled from '@emotion/styled';
+import { keyframes } from '@emotion/core';
+import { flipInX } from 'react-animations';
+
+const bAniDown = keyframes`${flipInX}`;
+ 
+const BouncyDiv = styled.div`
+  animation: .5s ${bAniDown};
+`;
+
 const UPDATE_PRODUCT = gql`
   mutation updateProduct($id: ID!, $input: ProductInput){
     updateProduct(id: $id, input: $input){
@@ -31,7 +41,7 @@ export default function ProductEdit({ product, setEdit }){
 
   const { id, name, exist, price } = product;
 
-  
+  // eslint-disable-next-line
   const [productstate, setProductState] = useState({
     nameState: name,
     existState: exist,
@@ -100,7 +110,7 @@ export default function ProductEdit({ product, setEdit }){
   })
 
   return (
-    <div className="mt-5">
+    <BouncyDiv className="mt-5">
       <div className="flex items-center justify-between bg-yellow-100 text-sm">
         <button 
           type="button"
@@ -193,6 +203,6 @@ export default function ProductEdit({ product, setEdit }){
         </div>
       </div>
 
-    </div>
+    </BouncyDiv>
   );
 };
