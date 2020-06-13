@@ -30,7 +30,7 @@ export default function Header(){
     push('/login', { replace: true });
   }
 
-  //
+  // Función para cerrar sesión
   const logUt = () => {
     // Eliminar Token del Local Storage
     
