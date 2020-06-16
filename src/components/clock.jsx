@@ -9,7 +9,7 @@ export default function LiveClock(){
   return (
     <div className="text-gray-600 text-center flex items-center justify-center">
 
-      <Clock className="font-semibold" format={'HH:mm:ss'} timezone={'GMT-5'} />
+      <Clock className="font-semibold" format={'HH:mm:ss'} />
 
       { m >= 18 ? (
         <svg className="w-4 h-4 mx-2" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>

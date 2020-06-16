@@ -1,32 +1,59 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 // react Select 
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
+import { useQuery, gql } from '@apollo/client';
+// Context
+import OrderContext from '../../contex/orders/OrderContext';
+
+const GET_SELLER_CLIENTS = gql`
+  query getSellerClients{
+    getSellerClients{
+      id
+      name
+      lastname
+    }
+  }
+`;
 
 // Options rect select
-const clients = [
-  { id: 1, name: 'Adrian' },
-  { id: 2, name: 'Evan' },
-  { id: 3, name: 'Alain' },
-  { id: 4, name: 'Mireya' },
-  { id: 5, name: 'Beth' },
-];
+// const clients = [
+//   { id: 1, name: 'Adrian' },
+//   { id: 2, name: 'Evan' },
+//   { id: 3, name: 'Alain' },
+//   { id: 4, name: 'Mireya' },
+//   { id: 5, name: 'Beth' },
+// ];
+
 // Animación para elementos seleccionados
 const animatedComponents = makeAnimated();
 
 export default function AssignCustomer(){
 
   // Local State
-  const [client, setClient] = useState([]);
+  // const [client, setClient] = useState([]);
 
-  useEffect(() => {
-    console.log(client);
-  }, [client]);
+  // Query para optener clientes del vendedor
+  const { data, loading, error } = useQuery(GET_SELLER_CLIENTS);
+
+  // Context
+  const orderContext = useContext(OrderContext);
+  const { addClient } = orderContext;
+
+  // useEffect(() => {
+  //   console.log(client);
+  // }, [client]);
+
+  if(loading) return <p>Loading...</p>
+  if(error) return <p>Error...</p>
 
   // Función onChange para agregar las selecciones al Local State
   const selectClients = client_arg => {
-    setClient(client_arg)
+    // setClient(client_arg)
+    addClient(client_arg)
   };
+
+  const { getSellerClients } = data;
 
   return (
     <>
@@ -36,18 +63,18 @@ export default function AssignCustomer(){
         Add the client or clients for the order
       </p>
       <Select 
-        options={clients} 
-        isMulti
+        options={getSellerClients} 
+        // isMulti
         components={animatedComponents}
         onChange={ client => selectClients(client)}
         // obtener [value] renombrado id del array de opciones
         getOptionValue={client => client.id}
         // obtener [label] renombrado name del array de opciones
-        getOptionLabel={client => client.name}
+        getOptionLabel={client => `${client.name} ${client.lastname}` }
         // placeholder del input 
         placeholder='Search or Select the client'
         // mensaje al no encontrar elementos buscados 
-        noOptionsMessage={() => 'No hay resultados'}
+        noOptionsMessage={() => 'No results'}
       />
 
     </>

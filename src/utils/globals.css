@@ -45,5 +45,8 @@ input[type=number] {
     @apply bg-gray-200
 }
 .tag-rounded{
-    @apply bg-p_blue-300 inline-block px-2 rounded-full text-white text-sm mr-1
+    @apply bg-p_blue-300 inline-block px-2 rounded-full text-white text-sm mr-1 mb-1 self-center
+}
+.content-step{
+    @apply px-5 pt-4 pb-5 text-sm bg-white border-l-4 rounded
 }
