@@ -1,8 +1,8 @@
 import React from 'react';
-import { useNavigate } from '@reach/router'
 // Apollo Client 
 import { useQuery, gql } from '@apollo/client';
 import TableClientRow from './table-client-row';
+// import { object } from 'prop-types';
 
 // import * as moment from 'moment';
 
@@ -20,22 +20,23 @@ const GET_SELLER_CLIENTS = gql`
   }
 `;
 
-export default function TableClients(){
-
-  const push = useNavigate();
+export default function TableClients({ navigate }){
 
   // Consulta a Apollo
-  const { data, loading, error } = useQuery(GET_SELLER_CLIENTS);
+  const { data, loading, error, networkStatus } = useQuery(GET_SELLER_CLIENTS);
+
+  console.log(networkStatus);
 
   // Proteger el no acceder a DATA antes de que obtenga resultados
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error {error.message}</p>;
+  if(loading) return <p>Loading...</p>;
+  if(error) return <p>Error {error.message}</p>;
 
   // console.log(data);
 
   // Si no hay información de un usuario autenticado
-  if(!data.getSellerClients){
-    push('/login');
+  if(!data && !data.getSellerClients){
+    navigate('/login');
+    return null
   }
 
   return (
@@ -58,6 +59,7 @@ export default function TableClients(){
         <tbody className="text-sm bg-white shadow-md text-center">
           { data.getSellerClients.map((client, index) => (
             <TableClientRow 
+              key={ client.id }
               client={ client }
               index={ index }
             />

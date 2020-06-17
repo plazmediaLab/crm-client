@@ -4,8 +4,8 @@ import OrderReducer from './OrderReducer';
 
 import {
   SELECT_CLIENT,
-  SELECT_PRODUCT,
-  SELECT_PRODUCTS
+  SELECT_PRODUCTS,
+  TOTAL_PRICE
 } from '../types';
 
 const OrderState = ({ children }) => {

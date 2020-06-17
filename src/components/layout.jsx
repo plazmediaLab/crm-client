@@ -3,12 +3,8 @@ import Seo from './seo';
 import SideBar from './sideBar';
 // Components
 import Header from './header';
-// Reach Router
-import { useLocation } from '@reach/router';
 
-export default function Layout( props ){
-
-  const location = useLocation();
+export default function Layout({ location, children }){
 
   return (
     <>
@@ -18,7 +14,7 @@ export default function Layout( props ){
 
         <div className="bg-carbon-600 min-h-screen flex flex-col justify-center">
           
-          { props.children }
+          { children }
 
         </div>
 
@@ -34,7 +30,7 @@ export default function Layout( props ){
 
             <div className="px-5 py-3">
               
-              { props.children }
+              { children }
 
             </div>
 

@@ -1,6 +1,5 @@
 import React from "react";
 // Components
-import Layout from "../components/layout";
 import Error from '../components/messages/error';
 // Appollo Client
 import { useMutation, gql } from '@apollo/client';
@@ -108,7 +107,7 @@ const EditClient = (props) => {
   };
 
   return (
-    <Layout>
+    <>
       
         <div className="flex">
           <div className="w-9/12 pr-5">
@@ -273,7 +272,7 @@ const EditClient = (props) => {
           </div>
         </div>
 
-    </Layout>
+    </>
   )
 }
 

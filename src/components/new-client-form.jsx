@@ -145,7 +145,7 @@ export default function NewClientForm(){
               className="text-sm text-green-500 font-semibold flex justify-center items-center w-full p-2 rounded hover:bg-green-500 hover:text-white"
               onClick={ () => ActiveForm() }
             >
-              <svg className="w-5 h-5 mr-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              <svg className="w-5 h-5 mr-2" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
               New client
             </button>
           </>

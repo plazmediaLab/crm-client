@@ -1,3 +1,3 @@
 import './src/utils/globals.css'
 
-export { wrapRootElement } from './gatsby-ssr';
+export { wrapRootElement, wrapPageElement } from './gatsby-ssr';

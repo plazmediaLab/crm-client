@@ -1,3 +1,3 @@
 export const SELECT_CLIENT = 'SELECT_CLIENT';
-export const SELECT_PRODUCT = 'SELECT_PRODUCT';
 export const SELECT_PRODUCTS = 'SELECT_PRODUCTS';
+export const TOTAL_PRICE = 'TOTAL_PRICE';

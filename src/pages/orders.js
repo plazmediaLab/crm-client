@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import Layout from "../components/layout";
 // Components
 import AssignCustomer from "../components/orders/assignCustomer";
 // Context Orders
@@ -13,27 +12,23 @@ const OrdersPage = () =>{
   const {  } = orderContex;
 
   return(
-    <Layout>
-  
-      <div className="flex">
-  
-        <div className="w-9/12 pr-5">
-          <div className="flex items-center justify-between">
-            <h2 className="titlePage">Create new order</h2>
-          </div>
+    <div className="flex">
 
-          <hr className="border-gray-300 w-full my-6"/>
+      <div className="w-9/12 pr-5">
+        <div className="flex items-center justify-between">
+          <h2 className="titlePage">Create new order</h2>
+        </div>
 
-          <AssignProducts />
-        </div>
-        
-        <div className="w-3/12">
-          <AssignCustomer />
-        </div>
-        
-      </div>  
-  
-    </Layout>
+        <hr className="border-gray-300 w-full my-6"/>
+
+        <AssignProducts />
+      </div>
+      
+      <div className="w-3/12">
+        <AssignCustomer />
+      </div>
+      
+    </div>
   )
 } 
 

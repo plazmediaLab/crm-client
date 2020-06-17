@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from '@reach/router';
-
-import Layout from '../components/layout';
+// Components
 import FormContainer from '../components/form-container';
 import LogoWhite from '../components/logo-white';
 import Error from '../components/messages/error';
@@ -98,7 +97,7 @@ export default function SignUp(){
   })
 
   return (
-    <Layout>
+    <>
 
         <div className="grid justify-center align-middle mb-3 mt-6">
           <LogoWhite />
@@ -223,6 +222,6 @@ export default function SignUp(){
 
         </FormContainer>
       
-    </Layout>
+    </>
   );
 };

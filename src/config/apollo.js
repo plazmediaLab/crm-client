@@ -25,6 +25,9 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
+  connectToDevTools: true,
+  ssrMode: true,
+  ssrForceFetchDelay: 200,
   cache: new InMemoryCache(), 
   // Agregamos nuestro HttpLink creado con nuestro header
   // Y lo concatenamos con la conexxión a Apollo

@@ -1,8 +1,7 @@
 import React, { useRef, useEffect } from 'react';
-import { Link, useNavigate } from '@reach/router';
+import { Link } from 'gatsby';
 
 // Components
-import Layout from "../components/layout";
 import FormContainer from '../components/form-container';
 import LogoWhite from '../components/logo-white';
 import Error from '../components/messages/error';
@@ -22,9 +21,8 @@ const USER_AUTH = gql`
   }
 `;
 
-export default function Login(){
+export default function Login({ navigate }){
 
-  const push = useNavigate();
   const mainInput = useRef(null);
 
   // Focus a input al montar el componete
@@ -33,7 +31,9 @@ export default function Login(){
   }, []);
 
   // Utenticar Usuario
-  const [ authUser ] = useMutation(USER_AUTH);
+  const [ authUser ] = useMutation(USER_AUTH, {
+    fetchPolicy: "no-cache"
+  });
 
   // Validaciones con Formik
   const formik = useFormik({
@@ -80,7 +80,7 @@ export default function Login(){
           // }
         })
         
-        push('/');
+        navigate('/');
 
       } catch (error) {
 
@@ -101,7 +101,7 @@ export default function Login(){
   })
 
   return (
-    <Layout>
+    <>
 
         <div className="grid justify-center align-middle my-3 mt-6">
           <LogoWhite />
@@ -183,6 +183,6 @@ export default function Login(){
 
         </FormContainer>
       
-    </Layout>
+    </>
   );
 };

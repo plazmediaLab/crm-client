@@ -1,7 +1,7 @@
 import {
   SELECT_CLIENT,
-  SELECT_PRODUCT,
-  SELECT_PRODUCTS
+  SELECT_PRODUCTS,
+  TOTAL_PRICE
 } from '../types';
 
 export default ( state, action ) => {
