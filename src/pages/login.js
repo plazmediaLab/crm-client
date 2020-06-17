@@ -24,17 +24,17 @@ const USER_AUTH = gql`
 export default function Login({ navigate }){
 
   const mainInput = useRef(null);
-
+  
   // Focus a input al montar el componete
   useEffect(() => {
     mainInput.current.focus();
   }, []);
-
+  
   // Utenticar Usuario
-  const [ authUser ] = useMutation(USER_AUTH, {
+  const [ authUser, { client } ] = useMutation(USER_AUTH, {
     fetchPolicy: "no-cache"
   });
-
+  
   // Validaciones con Formik
   const formik = useFormik({
     // valores iniciales
@@ -54,6 +54,8 @@ export default function Login({ navigate }){
       const { email, password } = val;
       
       try {
+
+        await client.resetStore()
         
         // Query a la DB
         const { data } = await authUser({
@@ -63,7 +65,7 @@ export default function Login({ navigate }){
               password
             }
           }
-        })
+        });
 
         // Almacenar Token en Local Storage
         localStorage.setItem('pm-token', data.authUser.token);
@@ -76,13 +78,13 @@ export default function Login({ navigate }){
           showConfirmButton: false,
           timer: 2000,
           timerProgressBar: true,
-          // onAfterClose: () => {
-          // }
-        })
+        });
         
         navigate('/');
 
       } catch (error) {
+
+        console.log(error);
 
         Swal.fire({
           toast: true,
@@ -91,7 +93,7 @@ export default function Login({ navigate }){
           title: 'Oops...',
           text: error.message,
           showConfirmButton: false,
-          timer: 2000,
+          timer: 10000,
           backdrop: false,
           timerProgressBar: true,
         })

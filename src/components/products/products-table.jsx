@@ -36,6 +36,7 @@ export default function ProductsTable({ edit, setEdit, setProduct }){
       <tbody className="text-sm bg-white shadow-md text-center">
         { data.getProducts.map((product, index) => (
           <ProductsTableRow 
+            key={ product.id }
             product={ product }
             index={ index }
             edit={ edit }
