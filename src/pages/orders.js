@@ -1,15 +1,16 @@
-import React, { useContext } from "react";
+import React from "react";
 // Components
 import AssignCustomer from "../components/orders/assignCustomer";
 // Context Orders
-import OrderContex from '../contex/orders/OrderContext';
+// import OrderContex from '../contex/orders/OrderContext';
 import AssignProducts from "../components/orders/assignProducts";
+import SummaryProducts from "../components/orders/summary-products";
 
 const OrdersPage = () =>{
 
   // Utilizar context
-  const orderContex = useContext(OrderContex);
-  const {  } = orderContex;
+  // const orderContex = useContext(OrderContex);
+  // const {  } = orderContex;
 
   return(
     <div className="flex">
@@ -22,6 +23,8 @@ const OrdersPage = () =>{
         <hr className="border-gray-300 w-full my-6"/>
 
         <AssignProducts />
+
+        <SummaryProducts/>
       </div>
       
       <div className="w-3/12">

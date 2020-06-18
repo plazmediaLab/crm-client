@@ -17,7 +17,7 @@ const GET_USER = gql`
 export default function Header(){
 
   // Query a Usuario
-  const { data, loading, error, client } = useQuery(GET_USER);
+  const { data, loading, client } = useQuery(GET_USER);
 
   // Proteger el no acceder a DATA antes de que obtenga resultados
   // if (loading) return <p>Loading...</p>;

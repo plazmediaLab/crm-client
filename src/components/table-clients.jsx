@@ -23,7 +23,7 @@ const GET_SELLER_CLIENTS = gql`
 export default function TableClients({ navigate }){
 
   // Consulta a Apollo
-  const { data, loading, error } = useQuery(GET_SELLER_CLIENTS);
+  const { data, loading } = useQuery(GET_SELLER_CLIENTS);
 
   // Proteger el no acceder a DATA antes de que obtenga resultados
   // if(loading) return <p>Loading...</p>;

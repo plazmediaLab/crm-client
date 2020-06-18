@@ -34,6 +34,7 @@ export default function AssignProducts(){
 
   // Función onChange para agregar las selecciones al Local State
   const selectProducts = client_arg => {
+    // Agregar los productos al State Global
     addProducts(client_arg)
   };
 
@@ -42,6 +43,7 @@ export default function AssignProducts(){
   return (
     <div className="content-step border-pink-500">
       <h3 className="text-pink-500">Assign Products</h3>
+      <p className="text-bluegray-200 text-sm">Select the product or products that are delivered to the customer in their order.</p>
 
       <Select 
         className="mt-3"
