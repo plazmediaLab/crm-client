@@ -1,6 +1,7 @@
 import {
   SELECT_CLIENT,
   SELECT_PRODUCTS,
+  PRODUCTS_QUANTITY,
   TOTAL_PRICE,
   RESET_STATE
 } from '../types';
@@ -22,6 +23,11 @@ export default ( state, action ) => {
         client: {},
         products: [],
         total: 0
+      }
+    case PRODUCTS_QUANTITY:
+      return{
+        ...state,
+        products: state.products.map( product => product.id === action.payload.id ? action.payload : product)
       }
       
   

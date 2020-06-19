@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+// Context
+import OrderContext from '../../contex/orders/OrderContext';
 
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/core';
@@ -15,14 +17,20 @@ export default function SummaryProductRow({ product }){
   const { name, exist, price } = product;
 
   const [totalPrice, setTotalPrice] = useState(price);
-  const [quantity, setQuantity] = useState(1);
+  const [quantityNum, setQuantityNum] = useState(1);
+
+  // Context
+  const orderContext = useContext(OrderContext);
+  const { productsQuantity } = orderContext;
 
   useEffect(() => {
-    setTotalPrice(price * Number(quantity));
-  }, [quantity]);
+    setTotalPrice(price * Number(quantityNum));
+    updateProduct()
+  }, [quantityNum]);
 
-  const updateQuantity = e => {
-    setQuantity(e.target.value);
+  const updateProduct = () => {
+    const newProduct = {...product, quantity: Number(quantityNum) }
+    productsQuantity(newProduct);
   };
 
   return (
@@ -37,8 +45,8 @@ export default function SummaryProductRow({ product }){
           min='0'
           type="number" 
           className="quantity py-2 px-3 rounded border border-gray-300 w-24 leading-tight focus:outline-none focus:shadow-outline"
-          value={ quantity }
-          onChange={e => updateQuantity(e)}
+          value={ quantityNum }
+          onChange={ e => setQuantityNum(e.target.value) }
         />
       </td>
     </BouncyTr>

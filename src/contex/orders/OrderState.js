@@ -5,6 +5,7 @@ import OrderReducer from './OrderReducer';
 import {
   SELECT_CLIENT,
   SELECT_PRODUCTS,
+  PRODUCTS_QUANTITY,
   TOTAL_PRICE,
   RESET_STATE
 } from '../types';
@@ -29,9 +30,28 @@ const OrderState = ({ children }) => {
   };
   // Modificar Productos
   const addProducts = products => {
+
+    let newState;
+    if(state.products.length > 0){
+      // Tomar una copia del segundo arreglo para agregarlo al primero
+      newState = products.map(product => {
+        const newObject = state.products.find( productState => productState.id === product.id );
+        return { ...product, ...newObject }
+      })
+    }else{
+      newState = products
+    }
+
     dispatch({
       type: SELECT_PRODUCTS,
-      payload: products
+      payload: newState
+    })
+  };
+  // Cantidad de los productos
+  const productsQuantity = newProduct => {
+    dispatch({
+      type: PRODUCTS_QUANTITY,
+      payload: newProduct
     })
   };
   // reset initialState
@@ -48,6 +68,7 @@ const OrderState = ({ children }) => {
         total: state.total,
         addClient,
         addProducts,
+        productsQuantity,
         resetState
       }}
     >
