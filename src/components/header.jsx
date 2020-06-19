@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 // Apollo Client
 import { useQuery, gql } from '@apollo/client';
 // Live Clock
 import LiveClock from './clock';
 import { navigateTo } from 'gatsby'
+// Context
+import OrderContext from '../contex/orders/OrderContext'
 
 const GET_USER = gql`
   query getUser{
@@ -15,6 +17,9 @@ const GET_USER = gql`
 `;
 
 export default function Header(){
+
+  const orderContext = useContext(OrderContext);
+  const { resetState } = orderContext;
 
   // Query a Usuario
   const { data, loading, client } = useQuery(GET_USER);
@@ -38,7 +43,11 @@ export default function Header(){
   
       // Redireccionar al Login 
       navigateTo('/login')
+      
+      // Resetear valores iniciales del state global
+      resetState();
     })
+
 
   }; 
 

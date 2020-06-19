@@ -5,7 +5,8 @@ import OrderReducer from './OrderReducer';
 import {
   SELECT_CLIENT,
   SELECT_PRODUCTS,
-  TOTAL_PRICE
+  TOTAL_PRICE,
+  RESET_STATE
 } from '../types';
 
 const OrderState = ({ children }) => {
@@ -33,13 +34,20 @@ const OrderState = ({ children }) => {
       payload: products
     })
   };
+  // reset initialState
+  const resetState = () => {
+    dispatch({
+      type: RESET_STATE,
+    })
+  }; 
 
   return (
     <OrderContext.Provider
       value={{
         products: state.products,
         addClient,
-        addProducts
+        addProducts,
+        resetState
       }}
     >
 

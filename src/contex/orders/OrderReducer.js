@@ -1,7 +1,8 @@
 import {
   SELECT_CLIENT,
   SELECT_PRODUCTS,
-  TOTAL_PRICE
+  TOTAL_PRICE,
+  RESET_STATE
 } from '../types';
 
 export default ( state, action ) => {
@@ -15,6 +16,12 @@ export default ( state, action ) => {
       return{
         ...state,
         products: action.payload
+      }
+    case RESET_STATE: 
+      return{
+        client: {},
+        products: [],
+        total: 0
       }
       
   

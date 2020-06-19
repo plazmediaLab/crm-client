@@ -96,7 +96,7 @@ export default function ProductsTableRow({ edit, product, index, setEdit, setPro
       <td className="border px-3 py-3 border border-gray-400 font-semibold">{ index + 1 }</td>
       <td className="border px-3 py-3 border border-gray-400 text-left">{ product.name }</td>
       <td className="border px-3 py-3 border border-gray-400 ">{ product.exist }</td>
-      <td className="border px-3 py-3 border border-gray-400 ">{ `$ ${new Intl.NumberFormat("en-IN").format(product.price)}` }</td>
+      <td className="border px-3 py-3 border border-gray-400 ">{ new Intl.NumberFormat('en-US',{ style: 'currency', currency: 'USD' }).format(product.price) }</td>
       <td className="border px-3 py-3 border border-gray-400">
         <button 
           type="button"

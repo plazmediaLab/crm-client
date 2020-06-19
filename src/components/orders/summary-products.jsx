@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 // Context
 import OrderContext from '../../contex/orders/OrderContext';
 import SummaryProductRow from './summary-product-row';
+import EmptyProducts from './empty-product';
 
 export default function SummaryProducts(){
 
@@ -12,10 +13,10 @@ export default function SummaryProducts(){
     <div className="content-step border-pink-500 mt-5">
       <div className="flex justify-between items-center">
         <h3 className="text-pink-500">Order summary</h3>
-        <p className="text-gray-500">Products (<span className="font-bold">0</span>)</p>
+        <p className="text-gray-500">Products (<span className="font-bold">{ products ? products.length : 0 }</span>)</p>
       </div>
 
-      { products.length > 0 ? (
+      { products && products.length > 0 ? (
         <table className="table-auto w-full mt-6">
           <thead>
             <tr className="text-carbon-500 font-medium text-xs">
@@ -36,7 +37,7 @@ export default function SummaryProducts(){
           </tbody>
         </table>
       ) : (
-        <p>No hay productos</p>
+        <EmptyProducts />
       )}
 
 
