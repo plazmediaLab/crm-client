@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import OrderContext from '../../contex/orders/OrderContext';
 import SummaryProductRow from './summary-product-row';
 import EmptyProducts from './empty-product';
+import SummaryTotal from './summary-total';
 
 export default function SummaryProducts(){
 
@@ -17,25 +18,30 @@ export default function SummaryProducts(){
       </div>
 
       { products && products.length > 0 ? (
-        <table className="table-auto w-full mt-6">
-          <thead>
-            <tr className="text-carbon-500 font-medium text-xs">
-              <th className="w-5/10 px-4 py-3 border-gray-400">Product</th>
-              <th className="w-2/10 px-4 py-3 border-gray-400" title="Price by unit">P/U</th>
-              <th className="w-2/10 px-4 py-3 border-gray-400" title="Total price">T/P</th>
-              <th className="w-2/10 px-4 py-3 border-gray-400" title="Total price">Stock</th>
-              <th className="w-1/10 px-4 py-3 border-gray-400">Quantity</th>
-            </tr>
-          </thead>
-          <tbody className="text-sm bg-white text-center">
-            { products.map((product, index) => (
-              <SummaryProductRow
-                key={product.id}
-                product={product}
-              />
-            )) }
-          </tbody>
-        </table>
+        <>
+          <table className="table-auto w-full mt-6">
+            <thead>
+              <tr className="text-carbon-500 font-medium text-xs">
+                <th className="w-5/10 px-4 py-3 border-gray-400">Product</th>
+                <th className="w-2/10 px-4 py-3 border-gray-400" title="Price by unit">P/U</th>
+                <th className="w-2/10 px-4 py-3 border-gray-400" title="Total price">T/P</th>
+                <th className="w-2/10 px-4 py-3 border-gray-400" title="Total price">Stock</th>
+                <th className="w-1/10 px-4 py-3 border-gray-400">Quantity</th>
+              </tr>
+            </thead>
+            <tbody className="text-sm bg-white text-center">
+              { products.map((product, index) => (
+                <SummaryProductRow
+                  key={product.id}
+                  product={product}
+                />
+              )) }
+            </tbody>
+          </table>
+
+          <SummaryTotal/>
+
+        </>
       ) : (
         <EmptyProducts />
       )}
