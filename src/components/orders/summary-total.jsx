@@ -9,6 +9,7 @@ export default function SummaryTotal(){
 
   useEffect(() => {
     updateTotal();
+    // eslint-disable-next-line
   }, [products]);
 
   return (

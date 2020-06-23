@@ -8,10 +8,6 @@ import SummaryProducts from "../components/orders/summary-products";
 
 const OrdersPage = () =>{
 
-  // Utilizar context
-  // const orderContex = useContext(OrderContex);
-  // const {  } = orderContex;
-
   return(
     <div className="flex">
 

@@ -28,6 +28,7 @@ function SummaryProductRow({ product }){
     // console.log(product);
     setTotalPrice(price * Number(quantityNum));
     updateProduct();
+    // eslint-disable-next-line
   }, [quantityNum]);
 
   const updateProduct = () => {

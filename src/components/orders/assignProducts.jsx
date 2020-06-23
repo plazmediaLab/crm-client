@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 // react Select 
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
@@ -22,24 +22,12 @@ const GET_PRODUCTS = gql`
 
 export default function AssignProducts(){
 
-  // State Local
-  // const [productList, setProductList] = useState([]);
-
   // Query para optener clientes del vendedor
   const { data, loading, error } = useQuery(GET_PRODUCTS);
 
   // Context
   const orderContext = useContext(OrderContext);
   const { addProducts } = orderContext;
-
-
-  // useEffect(() => {
-    // if(!productList){
-    //   setProductList([]);
-    // }else{
-    //   addProducts(productList);
-    // }
-  // }, [productList]);
 
   if(loading) return <p>Loading...</p>
   if(error) return <p>Error...</p>
