@@ -12,25 +12,30 @@ const BouncyTr = styled.tr`
   animation: .5s ${FadeIn};
 `;
 
-export default function SummaryProductRow({ product }){
+function SummaryProductRow({ product }){
 
+  
   const { name, exist, price } = product;
-
+  
   const [totalPrice, setTotalPrice] = useState(price);
   const [quantityNum, setQuantityNum] = useState(1);
-
+  
   // Context
   const orderContext = useContext(OrderContext);
   const { productsQuantity } = orderContext;
-
+  
   useEffect(() => {
+    // console.log(product);
     setTotalPrice(price * Number(quantityNum));
-    updateProduct()
+    updateProduct();
   }, [quantityNum]);
 
   const updateProduct = () => {
     const newProduct = {...product, quantity: Number(quantityNum) }
-    productsQuantity(newProduct);
+    if(newProduct.quantity){
+      // console.log(newProduct.quantity);
+      productsQuantity(newProduct);
+    }
   };
 
   return (
@@ -52,3 +57,5 @@ export default function SummaryProductRow({ product }){
     </BouncyTr>
   );
 };
+
+export default React.memo(SummaryProductRow);

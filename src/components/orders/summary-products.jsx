@@ -25,7 +25,7 @@ export default function SummaryProducts(){
                 <th className="w-5/10 px-4 py-3 border-gray-400">Product</th>
                 <th className="w-2/10 px-4 py-3 border-gray-400" title="Price by unit">P/U</th>
                 <th className="w-2/10 px-4 py-3 border-gray-400" title="Total price">T/P</th>
-                <th className="w-2/10 px-4 py-3 border-gray-400" title="Total price">Stock</th>
+                <th className="w-2/10 px-4 py-3 border-gray-400" title="Warehouse quantity">Stock</th>
                 <th className="w-1/10 px-4 py-3 border-gray-400">Quantity</th>
               </tr>
             </thead>

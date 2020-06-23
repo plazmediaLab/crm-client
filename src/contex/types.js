@@ -1,5 +1,5 @@
 export const SELECT_CLIENT = 'SELECT_CLIENT';
 export const SELECT_PRODUCTS = 'SELECT_PRODUCTS';
 export const PRODUCTS_QUANTITY = 'PRODUCTS_QUANTITY';
-export const TOTAL_PRICE = 'TOTAL_PRICE';
+export const UPDATE_TOTAL = 'UPDATE_TOTAL';
 export const RESET_STATE = 'RESET_STATE';

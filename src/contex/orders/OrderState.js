@@ -6,7 +6,7 @@ import {
   SELECT_CLIENT,
   SELECT_PRODUCTS,
   PRODUCTS_QUANTITY,
-  TOTAL_PRICE,
+  UPDATE_TOTAL,
   RESET_STATE
 } from '../types';
 
@@ -29,19 +29,14 @@ const OrderState = ({ children }) => {
     })
   };
   // Modificar Productos
-  const addProducts = products => {
-
+  const addProducts = selectProducts => {
     let newState;
-    if(state.products.length > 0){
-      // Tomar una copia del segundo arreglo para agregarlo al primero
-      newState = products.map(product => {
-        const newObject = state.products.find( productState => productState.id === product.id );
-        return { ...product, ...newObject }
-      })
-    }else{
-      newState = products
-    }
-
+    // Tomar una copia del segundo arreglo para agregarlo al primero
+    newState = selectProducts.map(product => {
+      const newObject = state.products.find( productState => productState.id === product.id );
+      return { ...product, ...newObject }
+    })
+          
     dispatch({
       type: SELECT_PRODUCTS,
       payload: newState
@@ -53,6 +48,12 @@ const OrderState = ({ children }) => {
       type: PRODUCTS_QUANTITY,
       payload: newProduct
     })
+  };
+  // Update Total
+  const updateTotal = () => {
+    dispatch({
+      type: UPDATE_TOTAL
+    });
   };
   // reset initialState
   const resetState = () => {
@@ -69,6 +70,7 @@ const OrderState = ({ children }) => {
         addClient,
         addProducts,
         productsQuantity,
+        updateTotal,
         resetState
       }}
     >

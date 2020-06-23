@@ -1,11 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 // Reducer
 import OrderContext from '../../contex/orders/OrderContext';
 
 export default function SummaryTotal(){
 
   const orderContext = useContext(OrderContext);
-  const { total } = orderContext;
+  const { products, total, updateTotal } = orderContext;
+
+  useEffect(() => {
+    updateTotal();
+  }, [products]);
 
   return (
     <>
