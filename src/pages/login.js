@@ -76,7 +76,7 @@ export default function Login({ navigate }){
           title: 'Loading...',
           icon: 'success',
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1500,
           timerProgressBar: true,
         });
         

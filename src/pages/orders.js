@@ -5,6 +5,7 @@ import AssignCustomer from "../components/orders/assignCustomer";
 // import OrderContex from '../contex/orders/OrderContext';
 import AssignProducts from "../components/orders/assignProducts";
 import SummaryProducts from "../components/orders/summary-products";
+import OrderSend from "../components/orders/order-send";
 
 const OrdersPage = () =>{
 
@@ -21,6 +22,7 @@ const OrdersPage = () =>{
         <AssignProducts />
 
         <SummaryProducts/>
+        <OrderSend />
       </div>
       
       <div className="w-3/12">

@@ -25,6 +25,9 @@ function SummaryProductRow({ product }){
   const { productsQuantity } = orderContext;
   
   useEffect(() => {
+    if(Number(quantityNum) === 0){
+      setQuantityNum(1);
+    }
     // console.log(product);
     setTotalPrice(price * Number(quantityNum));
     updateProduct();
@@ -48,7 +51,7 @@ function SummaryProductRow({ product }){
       <td>
         <input
           max={ exist }
-          min='0'
+          min='1'
           type="number" 
           className="quantity py-2 px-3 rounded border border-gray-300 w-24 leading-tight focus:outline-none focus:shadow-outline"
           value={ quantityNum }
