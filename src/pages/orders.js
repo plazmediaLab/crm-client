@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 // Components
 import AssignCustomer from "../components/orders/assignCustomer";
 // Context Orders
@@ -6,8 +6,14 @@ import AssignCustomer from "../components/orders/assignCustomer";
 import AssignProducts from "../components/orders/assignProducts";
 import SummaryProducts from "../components/orders/summary-products";
 import OrderSend from "../components/orders/order-send";
+// Context 
+import OrderContext from '../contex/orders/OrderContext';
 
 const OrdersPage = () =>{
+
+  // Context 
+  const orderContext = useContext(OrderContext);
+  const { validateError } = orderContext;
 
   return(
     <div className="flex">
@@ -20,6 +26,8 @@ const OrdersPage = () =>{
         <hr className="border-gray-300 w-full my-6"/>
 
         <AssignProducts />
+
+        { validateError ? <p>{ validateError }</p> : null }
 
         <SummaryProducts/>
         <OrderSend />

@@ -3,7 +3,8 @@ import {
   SELECT_PRODUCTS,
   PRODUCTS_QUANTITY,
   UPDATE_TOTAL,
-  RESET_STATE
+  RESET_STATE,
+  ERROR_MESSAGE
 } from '../types';
 
 export default ( state, action ) => {
@@ -33,6 +34,11 @@ export default ( state, action ) => {
         client: {},
         products: [],
         total: 0
+      }
+    case ERROR_MESSAGE:
+      return{
+        ...state,
+        validateError: action.payload
       }
       
   

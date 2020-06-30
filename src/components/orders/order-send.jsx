@@ -1,6 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
 // Context
 import OrderContext from '../../contex/orders/OrderContext';
+// Apollo
+import { useMutation, gql } from '@apollo/client';
+
+const NEW_ORDER = gql`
+  mutation newOrder($input: OrderInput){
+    newOrder(input: $input){
+      id
+    }
+  }
+`;
 
 function OrderSend(){
 
@@ -9,7 +19,10 @@ function OrderSend(){
 
   // Context
   const orderContext = useContext(OrderContext);
-  const { client, products, total } = orderContext;
+  const { client, products, total, errorMessage } = orderContext;
+
+  // Mutation para nueva pedido
+  const [ newOrder ] = useMutation(NEW_ORDER);
 
   useEffect(() => {    
     if(Object.keys(client).length > 0 && products.length > 0){
@@ -20,12 +33,34 @@ function OrderSend(){
   }, [client, products]);
 
   // Funsión para el Mutation
-  const orderSend = e => {
+  const orderSend = async e => {
     if(active){
       e.preventDefault();
       return null 
     }
-    console.log("Send...");
+    
+    // Destructuring
+    const { id } = client;
+
+    // Remover lo no deseado de productos
+    const order = products.map( ({ exist, __typename, ...item }) => item );
+
+    try {
+
+      const { data } = await newOrder({
+        variables:{
+          input:{
+           order,
+           total,
+           client: id
+          }
+        }
+      });
+      console.log(data.newOrder);
+
+    } catch (error) {
+      errorMessage(error.message)
+    }
   };
 
   return (

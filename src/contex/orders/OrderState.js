@@ -7,7 +7,8 @@ import {
   SELECT_PRODUCTS,
   PRODUCTS_QUANTITY,
   UPDATE_TOTAL,
-  RESET_STATE
+  RESET_STATE,
+  ERROR_MESSAGE
 } from '../types';
 
 const OrderState = ({ children }) => {
@@ -16,7 +17,8 @@ const OrderState = ({ children }) => {
   const initialState = {
     client: {},
     products: [],
-    total: 0
+    total: 0,
+    validateError: null
   };
 
   const [ state, dispatch ] = useReducer(OrderReducer, initialState);
@@ -61,6 +63,13 @@ const OrderState = ({ children }) => {
       type: RESET_STATE,
     })
   }; 
+  // Validar por error al crear un nuevo pedido
+  const errorMessage = content => {
+    dispatch({
+      type: ERROR_MESSAGE,
+      payload: content
+    })
+  }
 
   return (
     <OrderContext.Provider
@@ -68,11 +77,13 @@ const OrderState = ({ children }) => {
         client: state.client,
         products: state.products,
         total: state.total,
+        validateError: state.validateError,
         addClient,
         addProducts,
         productsQuantity,
         updateTotal,
-        resetState
+        resetState,
+        errorMessage
       }}
     >
 
