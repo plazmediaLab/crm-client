@@ -47,7 +47,7 @@ function OrderSend(){
 
     try {
 
-      const { data } = await newOrder({
+      await newOrder({
         variables:{
           input:{
            order,
@@ -56,7 +56,6 @@ function OrderSend(){
           }
         }
       });
-      console.log(data.newOrder);
 
     } catch (error) {
       errorMessage(error.message)

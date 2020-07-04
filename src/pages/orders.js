@@ -8,6 +8,7 @@ import SummaryProducts from "../components/orders/summary-products";
 import OrderSend from "../components/orders/order-send";
 // Context 
 import OrderContext from '../contex/orders/OrderContext';
+import Error from "../components/messages/error";
 
 const OrdersPage = () =>{
 
@@ -27,9 +28,20 @@ const OrdersPage = () =>{
 
         <AssignProducts />
 
-        { validateError ? <p>{ validateError }</p> : null }
-
         <SummaryProducts/>
+
+        { validateError ? (
+          <Error 
+            message={validateError}
+            // message="New Message"
+            mt="mt-4"
+            bg='bg-red-600'
+            txt='text-white'
+            p='p-4'
+            br='rounded'
+          />
+        ) : null }
+
         <OrderSend />
       </div>
       

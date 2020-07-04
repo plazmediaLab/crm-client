@@ -46,7 +46,7 @@ export default function SignUp(){
       name: Yup.string().required('The name field is required'),
       lastname: Yup.string().required('The lastname field is required'),
       email: Yup.string().email('The email is not valid').required('The email field is required'),
-      password: Yup.string().required('The password field is required').min(6, 'The password must have at least 6 characters')
+      password: Yup.string().required('The password field is required').min(4, 'The password must have at least 6 characters')
     }),
     onSubmit: async (val, { resetForm }) => {
       // console.log('Send');
