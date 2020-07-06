@@ -53,3 +53,9 @@ input[type=number]:not(.quantity){
 .content-step{
     @apply px-5 pt-4 pb-5 text-sm bg-white border-l-4 rounded
 }
+.button-success{
+    @apply bg-green-500 text-white rounded cursor-pointer transition-colors duration-100 ease-in-out p-2 text-center w-full block
+}
+.button-success:hover{
+    @apply bg-green-400
+}

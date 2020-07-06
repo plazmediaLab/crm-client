@@ -58,7 +58,10 @@ function OrderSend(){
       });
 
     } catch (error) {
-      errorMessage(error.message)
+      errorMessage(error.message);
+      setTimeout(() => {
+        errorMessage(null);
+      }, 4000);
     }
   };
 
