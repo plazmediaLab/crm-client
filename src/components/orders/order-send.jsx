@@ -3,6 +3,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import OrderContext from '../../contex/orders/OrderContext';
 // Apollo
 import { useMutation, gql } from '@apollo/client';
+// Gatsby
+import { navigate } from 'gatsby';
+// Sweet Alert
+import Swal from 'sweetalert2';
 
 const NEW_ORDER = gql`
   mutation newOrder($input: OrderInput){
@@ -56,6 +60,19 @@ function OrderSend(){
           }
         }
       });
+
+      // Mostrar SweetAlert y redireccionar al finalizar
+      Swal.fire({
+        position: 'center',
+        title: 'The order has been created successfully',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+      });
+
+      // Redireccionar a la página Orders
+      navigate('/orders');
 
     } catch (error) {
       errorMessage(error.message);
