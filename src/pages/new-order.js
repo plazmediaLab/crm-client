@@ -14,10 +14,11 @@ const Neworder = () =>{
 
   // Context 
   const orderContext = useContext(OrderContext);
-  const { validateError } = orderContext;
+  const { validateError, resetState } = orderContext;
 
   const cancelOrder = () => {
     navigate("/orders");
+    resetState();
   };
 
   return(
